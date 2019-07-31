@@ -1,13 +1,13 @@
 import React from 'react';
 
-export function pressKey(wrapper, inputIdTag, key) {
-  wrapper.find(`input[id='${inputIdTag}']`).simulate('keydown', { key });
+export function pressKey(wrapper, selector, key) {
+  wrapper.find(selector).simulate('keydown', { key });
 }
 
-export function type(wrapper, inputIdTag, string) {
-  [...string].forEach(letter => pressKey(wrapper, inputIdTag, letter));
+export function type(wrapper, selector, string) {
+  [...string].forEach(letter => pressKey(wrapper, selector, letter));
 
-  wrapper.find(`input[id='${inputIdTag}']`).simulate('change', { target: { value: string } });
+  wrapper.find(selector).simulate('change', { target: { value: string } });
 }
 
 export function click(wrapper, selector) {
