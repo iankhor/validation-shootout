@@ -5,26 +5,14 @@ import './App.css';
 function App() {
   const [username, setUsername] = useState('');
 
-  const { register, errors, handleSubmit } = useForm({
-    mode: 'onBlur'
-  });
+  const { register, errors } = useForm({ mode: 'onBlur' });
+  const usernameValidator = register({ maxLength: { value: 5, message: 'Username too long' } });
 
   return (
     <form className="form">
       <div className="cell">
         <label>User name:</label>
-        <input
-          type="text"
-          name="username"
-          value={username}
-          onChange={({ target: { value } }) => setUsername(value)}
-          ref={register({
-            maxLength: {
-              value: 5,
-              message: 'Username too long'
-            }
-          })}
-        />
+        <input type="text" name="username" value={username} onChange={({ target: { value } }) => setUsername(value)} ref={usernameValidator} />
         {errors.username && <div>{errors.username.message}</div>}
       </div>
 
