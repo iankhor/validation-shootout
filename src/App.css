@@ -12,6 +12,6 @@ html {
   grid-template-columns: 20rem 20rem;
 }
 
-.row {
+.cell {
   padding: 2rem 2rem 2rem 2rem;
 }
