@@ -1,9 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { type } from './test-utils';
 import App from './App';
 
-const shallowComponent = (props = {}) => shallow(<App {...props} />);
+const shallowComponent = (props = {}) => mount(<App {...props} />);
 
 it('renders without crashing', () => {
   shallowComponent();
@@ -38,11 +38,16 @@ fdescribe('username', () => {
     });
 
     describe('more than 5', () => {
-      it('displays error message', () => {
+      it('displays error message', done => {
         const component = shallowComponent();
-        type(component, "input[name='username']", '123456');
+        type(component, "input[name='username']", '');
 
-        expect(component.contains(errorElement)).toEqual(true);
+        process.nextTick(() => {
+          // expect(component.find('#dob_form_group').text()).toContain('enter a valid date')
+          console.log(component.debug());
+          expect(component.contains(errorElement)).toEqual(true);
+          done();
+        });
       });
     });
   });
