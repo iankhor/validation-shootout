@@ -8,6 +8,7 @@ export function type(wrapper, selector, string) {
   [...string].forEach(letter => pressKey(wrapper, selector, letter));
 
   wrapper.find(selector).simulate('change', { target: { value: string } });
+  wrapper.find(selector).simulate('blur');
 }
 
 export function click(wrapper, selector) {
