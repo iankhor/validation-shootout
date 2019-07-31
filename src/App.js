@@ -25,7 +25,7 @@ function App() {
       </div>
 
       <div className="cell">
-        <label for="country">Country</label>
+        <label>Country</label>
       </div>
 
       <div className="cell">
