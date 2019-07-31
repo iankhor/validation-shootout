@@ -21,6 +21,13 @@ fdescribe('username length', () => {
   const errorElement = <div>Username too long</div>;
 
   describe('less than 5 inclusive', () => {
+    it('show displayed value', () => {
+      const component = shallowComponent();
+      type(component, "input[name='username']", 'foobar');
+
+      expect(component.find("input[name='username']").props().value).toEqual('foobar');
+    });
+
     it('does not display error message', () => {
       const component = shallowComponent();
       type(component, "input[name='username']", '12345');

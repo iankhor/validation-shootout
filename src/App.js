@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [username, setUsername] = useState('');
+
   return (
     <form className="form">
       <div className="cell">
         <label>User name:</label>
-        <input type="text" name="username" />
+        <input type="text" name="username" value={username} onChange={({ target: { value } }) => setUsername(value)} />
       </div>
 
       <div className="cell" />
