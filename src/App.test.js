@@ -17,31 +17,33 @@ it('has a form element', () => {
   ).toEqual(true);
 });
 
-fdescribe('username length', () => {
-  const errorElement = <div>Username too long</div>;
+fdescribe('username', () => {
+  it('shows displayed value', () => {
+    const component = shallowComponent();
+    type(component, "input[name='username']", 'foobar');
 
-  describe('less than 5 inclusive', () => {
-    it('show displayed value', () => {
-      const component = shallowComponent();
-      type(component, "input[name='username']", 'foobar');
-
-      expect(component.find("input[name='username']").props().value).toEqual('foobar');
-    });
-
-    it('does not display error message', () => {
-      const component = shallowComponent();
-      type(component, "input[name='username']", '12345');
-
-      expect(component.contains(errorElement)).toEqual(false);
-    });
+    expect(component.find("input[name='username']").props().value).toEqual('foobar');
   });
 
-  describe('more than 5', () => {
-    it('displays error message', () => {
-      const component = shallowComponent();
-      type(component, "input[name='username']", '123456');
+  describe('validation', () => {
+    const errorElement = <div>Username too long</div>;
 
-      expect(component.contains(errorElement)).toEqual(true);
+    describe('less than 5 inclusive', () => {
+      it('does not display error message', () => {
+        const component = shallowComponent();
+        type(component, "input[name='username']", '12345');
+
+        expect(component.contains(errorElement)).toEqual(false);
+      });
+    });
+
+    describe('more than 5', () => {
+      it('displays error message', () => {
+        const component = shallowComponent();
+        type(component, "input[name='username']", '123456');
+
+        expect(component.contains(errorElement)).toEqual(true);
+      });
     });
   });
 });
