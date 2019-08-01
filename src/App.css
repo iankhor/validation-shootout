@@ -15,3 +15,7 @@ html {
 .cell {
   padding: 2rem 2rem 2rem 2rem;
 }
+
+.error input {
+  border: solid 0.05rem red;
+}

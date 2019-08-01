@@ -10,7 +10,7 @@ const App = () => {
 
   return (
     <form className="form">
-      <div className="cell">
+      <div className={'cell ' + (errors.username ? 'error' : '')}>
         <label>User name:</label>
         <input type="text" name="username" value={username} onChange={({ target: { value } }) => setUsername(value)} ref={usernameValidator} />
         {errors.username && <div>{errors.username.message}</div>}
