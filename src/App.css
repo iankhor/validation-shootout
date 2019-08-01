@@ -19,3 +19,7 @@ html {
 .error input {
   border: solid 0.05rem red;
 }
+
+.error select {
+  border: solid 0.05rem red;
+}

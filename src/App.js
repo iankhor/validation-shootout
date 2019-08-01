@@ -12,6 +12,8 @@ const App = () => {
   const passwordValidator = ({ psw, confirmPsw }) => psw === confirmPsw || 'Passwords do not match';
   const confirmPasswordRegister = register({ required: true, validate: () => passwordValidator(getValues()) });
 
+  const countrySelectRegister = register({ required: 'Please select a country' });
+
   const errorClassName = errorKey => (errors[errorKey] ? 'error' : '');
 
   return (
@@ -40,12 +42,14 @@ const App = () => {
         <label>Country</label>
       </div>
 
-      <div className="cell">
-        <select id="country" name="country">
+      <div className={'cell ' + errorClassName('country')}>
+        <select id="country" name="country" defaultValue="" ref={countrySelectRegister}>
+          <option value="" />
           <option value="australia">Australia</option>
           <option value="canada">Canada</option>
           <option value="usa">USA</option>
         </select>
+        {errors.country && <div>{errors.country.message}</div>}
       </div>
     </form>
   );
