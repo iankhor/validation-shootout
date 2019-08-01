@@ -9,7 +9,7 @@ const App = () => {
   const usernameRegister = register({ maxLength: { value: 5, message: 'Username too long' } });
   const usernameOnChange = ({ target: { value } }) => setValue(value);
 
-  const passwordRegister = register({ required: true });
+  const passwordRegister = register({ required: 'Please enter a password' });
 
   const passwordValidator = ({ psw, confirmPsw }) => psw === confirmPsw || 'Passwords do not match';
   const confirmPasswordRegister = register({ required: true, validate: () => passwordValidator(getValues()) });
@@ -29,6 +29,7 @@ const App = () => {
       <div className={'cell ' + errorClassName('confirmPsw')}>
         <label>Password:</label>
         <input type="password" name="psw" ref={passwordRegister} />
+        {errors.psw && <div>{errors.psw.message}</div>}
       </div>
 
       <div className={'cell ' + errorClassName('confirmPsw')}>
