@@ -3,11 +3,9 @@ import useForm from 'react-hook-form';
 import './App.css';
 
 const App = () => {
-  const { register, errors, watch, setValue, getValues } = useForm({ mode: 'onBlur' });
+  const { register, errors, getValues } = useForm({ mode: 'onBlur' });
 
-  const username = watch('username', '');
   const usernameRegister = register({ maxLength: { value: 5, message: 'Username too long' } });
-  const usernameOnChange = ({ target: { value } }) => setValue(value);
 
   const passwordRegister = register({ required: 'Please enter a password' });
 
@@ -20,7 +18,7 @@ const App = () => {
     <form className="form">
       <div className={'cell ' + errorClassName('username')}>
         <label>User name:</label>
-        <input type="text" name="username" value={username} onChange={usernameOnChange} ref={usernameRegister} />
+        <input type="text" name="username" ref={usernameRegister} />
         {errors.username && <div>{errors.username.message}</div>}
       </div>
 
