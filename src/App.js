@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useForm from 'react-hook-form';
 import './App.css';
 
-function App() {
+const App = () => {
   const [username, setUsername] = useState('');
 
   const { register, errors } = useForm({ mode: 'onBlur' });
@@ -41,6 +41,6 @@ function App() {
       </div>
     </form>
   );
-}
+};
 
 export default App;
