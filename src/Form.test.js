@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { type } from './test-utils';
-import App from './App';
+import Form from './Form';
 
-const shallowComponent = (props = {}) => mount(<App {...props} />);
+const shallowComponent = (props = {}) => mount(<Form {...props} />);
 
 it('renders without crashing', () => {
   shallowComponent();
