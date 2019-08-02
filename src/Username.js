@@ -1,8 +1,9 @@
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 import './Form.css';
 
-const Username = ({ form }) => {
-  const { register, errors } = form;
+const Username = () => {
+  const { register, errors } = useFormContext();
 
   const usernameRegister = register({ maxLength: { value: 5, message: 'Username too long' } });
 

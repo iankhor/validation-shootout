@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
+import { useFormContext } from 'react-hook-form';
+
 import './Form.css';
 
-const Password = ({ form }) => {
-  const { register, errors, getValues } = form;
-
-  const errorClassName = errorKey => (errors[errorKey] ? 'error' : '');
+const Password = () => {
+  const { register, errors, getValues } = useFormContext();
 
   const passwordRegister = register({ required: 'Please enter a password' });
 
@@ -13,13 +13,13 @@ const Password = ({ form }) => {
 
   return (
     <Fragment>
-      <div className={'cell ' + errorClassName('psw')}>
+      <div className={'cell ' + (errors.psw ? 'error' : '')}>
         <label>Password:</label>
         <input type="password" name="psw" ref={passwordRegister} />
         {errors.psw && <div>{errors.psw.message}</div>}
       </div>
 
-      <div className={'cell ' + errorClassName('confirmPsw')}>
+      <div className={'cell ' + (errors.confirmPsw ? 'error' : '')}>
         <label>Confirm password:</label>
         <input type="password" name="confirmPsw" ref={confirmPasswordRegister} />
         {errors.confirmPsw && <div>{errors.confirmPsw.message}</div>}

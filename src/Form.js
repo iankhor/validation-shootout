@@ -1,23 +1,25 @@
 import React from 'react';
-import useForm from 'react-hook-form';
-import './Form.css';
+import useForm, { FormContext } from 'react-hook-form';
 import Username from './Username';
 import Password from './Password';
 import Country from './Country';
+import './Form.css';
 
 const Form = () => {
   const form = useForm({ mode: 'onBlur' });
 
   return (
-    <form className="form">
-      <Username form={form} />
+    <FormContext {...form}>
+      <form className="form">
+        <Username />
 
-      <div className="cell" />
+        <div className="cell" />
 
-      <Password form={form} />
+        <Password form={form} />
 
-      <Country form={form} />
-    </form>
+        <Country form={form} />
+      </form>
+    </FormContext>
   );
 };
 

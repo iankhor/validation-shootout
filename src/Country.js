@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
+import { useFormContext } from 'react-hook-form';
 
-const Country = ({ form }) => {
-  const { register, errors } = form;
+const Country = () => {
+  const { register, errors } = useFormContext();
 
   const countrySelectRegister = register({ required: 'Please select a country' });
-  const errorClassName = errorKey => (errors[errorKey] ? 'error' : '');
 
   return (
     <Fragment>
@@ -12,7 +12,7 @@ const Country = ({ form }) => {
         <label>Country</label>
       </div>
 
-      <div className={'cell ' + errorClassName('country')}>
+      <div className={'cell ' + (errors.country ? 'error' : '')}>
         <select id="country" name="country" defaultValue="" ref={countrySelectRegister}>
           <option value="" />
           <option value="australia">Australia</option>
