@@ -23,3 +23,8 @@ html {
 .error select {
   border: solid 0.05rem red;
 }
+
+.form button[type='submit'] {
+  background: orangered;
+  font-size: 2rem;
+}

@@ -8,9 +8,15 @@ import './Form.css';
 const Form = () => {
   const form = useForm({ mode: 'onBlur' });
 
+  const { handleSubmit } = form;
+
+  const onSubmit = data => {
+    alert(JSON.stringify(data));
+  };
+
   return (
     <FormContext {...form}>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <Username />
 
         <div className="cell" />
@@ -18,6 +24,8 @@ const Form = () => {
         <Password form={form} />
 
         <Country form={form} />
+
+        <button type="submit">Submit</button>
       </form>
     </FormContext>
   );
