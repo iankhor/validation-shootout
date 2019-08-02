@@ -17,14 +17,7 @@ it('has a form element', () => {
   ).toEqual(true);
 });
 
-fdescribe('username', () => {
-  it('shows displayed value', () => {
-    const component = shallowComponent();
-    type(component, "input[name='username']", 'foobar');
-
-    expect(component.find("input[name='username']").props().value).toEqual('foobar');
-  });
-
+describe('username', () => {
   describe('validation', () => {
     const errorElement = <div>Username too long</div>;
 
@@ -44,7 +37,6 @@ fdescribe('username', () => {
 
         process.nextTick(() => {
           // expect(component.find('#dob_form_group').text()).toContain('enter a valid date')
-          console.log(component.debug());
           expect(component.contains(errorElement)).toEqual(true);
           done();
         });
