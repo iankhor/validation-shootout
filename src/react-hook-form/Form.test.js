@@ -35,11 +35,7 @@ describe('username', () => {
         const component = shallowComponent();
         type(component, "input[name='username']", '');
 
-        process.nextTick(() => {
-          // expect(component.find('#dob_form_group').text()).toContain('enter a valid date')
-          expect(component.contains(errorElement)).toEqual(true);
-          done();
-        });
+        expect(component.contains(errorElement)).toEqual(true);
       });
     });
   });
