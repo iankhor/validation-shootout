@@ -44,6 +44,26 @@ describe('Username field', () => {
           expect(component.contains(<div>Required</div>)).toEqual(false);
         });
       });
+
+      describe('present', () => {
+        it('when more than 5, displays error', () => {
+          const component = mountComponent();
+
+          type(component, "input[name='username']", '123456');
+          component.update();
+
+          expect(component.contains(<div>Username too long</div>)).toEqual(true);
+        });
+
+        it('when less than 5 inclusive, does not display error', () => {
+          const component = mountComponent();
+
+          type(component, "input[name='username']", '12345');
+          component.update();
+
+          expect(component.contains(<div>Username too long</div>)).toEqual(false);
+        });
+      });
     });
   });
 });
