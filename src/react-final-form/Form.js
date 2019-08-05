@@ -15,6 +15,7 @@ const FinalForm = () => {
       render={({ handleSubmit }) => (
         <form className="form" onSubmit={handleSubmit}>
           <Username />
+          <div className="cell" />
           <Password />
         </form>
       )}

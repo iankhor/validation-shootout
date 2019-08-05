@@ -102,13 +102,13 @@ describe('Password field', () => {
     });
   });
 
-  fdescribe('confirm password validation', () => {
+  describe('confirm password validation', () => {
     describe('input not present', () => {
       it('when touched, shows required error ', () => {
         const component = mountComponent();
-        const passwordInput = component.find("input[type='password'][name='confirm-pwd']");
+        const confirmPasswordInput = component.find("input[type='password'][name='confirm-pwd']");
 
-        passwordInput.simulate('blur');
+        confirmPasswordInput.simulate('blur');
         expect(component.contains(<div>Password required</div>)).toEqual(true);
       });
 
@@ -126,6 +126,19 @@ describe('Password field', () => {
           component.update();
 
           expect(component.find("input[name='confirm-pwd']").props().value).toEqual('password123');
+        });
+
+        describe('confirm password input does not match password input field', () => {
+          it('displays password does not match error', () => {
+            const component = mountComponent();
+
+            type(component, "input[name='pwd']", 'password123');
+            type(component, "input[name='confirm-pwd']", 'notMatchPassword123');
+
+            component.update();
+
+            expect(component.contains(<div>Password does not match</div>)).toEqual(true);
+          });
         });
       });
     });
