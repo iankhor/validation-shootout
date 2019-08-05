@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form } from 'react-final-form';
 import Username from './Username';
+import Password from './Password';
 import './../Form.css';
 
 const onSubmit = values => {
@@ -14,6 +15,7 @@ const FinalForm = () => {
       render={({ handleSubmit }) => (
         <form className="form" onSubmit={handleSubmit}>
           <Username />
+          <Password />
         </form>
       )}
     />
