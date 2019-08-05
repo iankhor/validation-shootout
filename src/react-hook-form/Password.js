@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { useFormContext } from 'react-hook-form';
-import './Form.css';
+import './../Form.css';
 
 const Password = () => {
   const { register, errors, getValues } = useFormContext();
