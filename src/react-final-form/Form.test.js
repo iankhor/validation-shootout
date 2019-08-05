@@ -88,7 +88,7 @@ describe('Password field', () => {
   it('has confirm password field', () => {
     expect(
       mountComponent()
-        .find("input[type='password'][name='confirm-pwd']")
+        .find("input[type='password'][name='confirmPwd']")
         .exists()
     ).toEqual(true);
   });
@@ -126,7 +126,7 @@ describe('Password field', () => {
     describe('input not present', () => {
       it('when touched, shows required error ', () => {
         const component = mountComponent();
-        const confirmPasswordInput = component.find("input[type='password'][name='confirm-pwd']");
+        const confirmPasswordInput = component.find("input[type='password'][name='confirmPwd']");
 
         confirmPasswordInput.simulate('blur');
         expect(component.contains(<div>Password required</div>)).toEqual(true);
@@ -142,10 +142,10 @@ describe('Password field', () => {
         it('displays what was entered', () => {
           const component = mountComponent();
 
-          type(component, "input[name='confirm-pwd']", 'password123');
+          type(component, "input[name='confirmPwd']", 'password123');
           component.update();
 
-          expect(component.find("input[name='confirm-pwd']").props().value).toEqual('password123');
+          expect(component.find("input[name='confirmPwd']").props().value).toEqual('password123');
         });
 
         describe('confirm password input does not match password input field', () => {
@@ -153,7 +153,7 @@ describe('Password field', () => {
             const component = mountComponent();
 
             type(component, "input[name='pwd']", 'password123');
-            type(component, "input[name='confirm-pwd']", 'notMatchPassword123');
+            type(component, "input[name='confirmPwd']", 'notMatchPassword123');
 
             component.update();
 
@@ -216,6 +216,36 @@ describe('Country field', () => {
         component.update();
 
         expect(component.find("select[name='country']").props().value).toEqual('australia');
+      });
+    });
+  });
+});
+
+describe('form submission', () => {
+  it('has a submit button', () => {
+    const component = mountComponent();
+    expect(component.find("button[type='submit']").exists()).toEqual(true);
+  });
+
+  describe('valid form', () => {
+    it('submits the form', () => {
+      const component = mountComponent();
+
+      type(component, "input[name='username']", '12345');
+      type(component, "input[name='pwd']", 'password123');
+      type(component, "input[name='confirmPwd']", 'password123');
+      component.find("select[name='country']").simulate('change', { target: { value: 'australia' } });
+
+      component.find('form').simulate('submit');
+      component.update();
+
+      const submittedValues = JSON.parse(component.find('pre').text());
+
+      expect(submittedValues).toEqual({
+        username: '12345',
+        pwd: 'password123',
+        confirmPwd: 'password123',
+        country: 'australia'
       });
     });
   });

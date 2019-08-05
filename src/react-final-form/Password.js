@@ -28,7 +28,7 @@ const Password = () => {
         )}
       </Field>
 
-      <Field type="password" name="confirm-pwd" validate={confirmPasswordValidator}>
+      <Field type="password" name="confirmPwd" validate={confirmPasswordValidator}>
         {({ input, meta: { error, touched } }) => (
           <div className={'cell ' + (error && touched ? 'error' : '')}>
             <label>Confirm password:</label>

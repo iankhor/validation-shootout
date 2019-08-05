@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Field } from 'react-final-form';
 
 const Country = () => {
@@ -9,16 +9,21 @@ const Country = () => {
   return (
     <Field name="country" id="country" defaultValue="" validate={CountryValidator}>
       {({ input, meta: { error, touched } }) => (
-        <div className={'cell ' + (error && touched ? 'error' : '')}>
-          <label>Country</label>
-          <select {...input}>
-            <option value="" />
-            <option value="australia">Australia</option>
-            <option value="canada">Canada</option>
-            <option value="usa">USA</option>
-          </select>
-          {error && touched && <div>{error}</div>}
-        </div>
+        <Fragment>
+          <div className="cell">
+            <label>Country</label>
+          </div>
+
+          <div className={'cell ' + (error && touched ? 'error' : '')}>
+            <select {...input}>
+              <option value="" />
+              <option value="australia">Australia</option>
+              <option value="canada">Canada</option>
+              <option value="usa">USA</option>
+            </select>
+            {error && touched && <div>{error}</div>}
+          </div>
+        </Fragment>
       )}
     </Field>
   );
