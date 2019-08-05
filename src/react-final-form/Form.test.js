@@ -101,4 +101,33 @@ describe('Password field', () => {
       });
     });
   });
+
+  fdescribe('confirm password validation', () => {
+    describe('input not present', () => {
+      it('when touched, shows required error ', () => {
+        const component = mountComponent();
+        const passwordInput = component.find("input[type='password'][name='confirm-pwd']");
+
+        passwordInput.simulate('blur');
+        expect(component.contains(<div>Password required</div>)).toEqual(true);
+      });
+
+      it(' when not touched, does not show required error', () => {
+        const component = mountComponent();
+
+        expect(component.contains(<div>Password required</div>)).toEqual(false);
+      });
+
+      describe('input present', () => {
+        it('displays what was entered', () => {
+          const component = mountComponent();
+
+          type(component, "input[name='confirm-pwd']", 'password123');
+          component.update();
+
+          expect(component.find("input[name='confirm-pwd']").props().value).toEqual('password123');
+        });
+      });
+    });
+  });
 });
