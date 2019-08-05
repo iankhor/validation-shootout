@@ -5,7 +5,7 @@ import Password from './Password';
 import Country from './Country';
 import './../Form.css';
 
-const Form = () => {
+const HookForm = () => {
   const form = useForm({ mode: 'onBlur' });
 
   const { handleSubmit } = form;
@@ -31,4 +31,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default HookForm;
