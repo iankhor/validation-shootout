@@ -2,6 +2,7 @@ import React from 'react';
 import { Form } from 'react-final-form';
 import Username from './Username';
 import Password from './Password';
+import Country from './Country';
 import './../Form.css';
 
 const onSubmit = values => {
@@ -17,6 +18,7 @@ const FinalForm = () => {
           <Username />
           <div className="cell" />
           <Password />
+          <Country />
         </form>
       )}
     />
