@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useForm, { FormContext } from 'react-hook-form';
 import Username from './Username';
 import Password from './Password';
@@ -7,12 +7,10 @@ import './../Form.css';
 
 const HookForm = () => {
   const form = useForm({ mode: 'onBlur' });
-
   const { handleSubmit } = form;
 
-  const onSubmit = data => {
-    alert(JSON.stringify(data));
-  };
+  const [formValues, setFormValues] = useState({});
+  const onSubmit = values => setFormValues(values);
 
   return (
     <FormContext {...form}>
@@ -26,6 +24,11 @@ const HookForm = () => {
         <Country form={form} />
 
         <button type="submit">Submit</button>
+
+        <div className="cell" />
+
+        <h3>Submitted values</h3>
+        <pre>{JSON.stringify(formValues, 0, 2)}</pre>
       </form>
     </FormContext>
   );
