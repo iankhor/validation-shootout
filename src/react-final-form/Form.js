@@ -1,41 +1,23 @@
 import React from 'react';
+import { Form } from 'react-final-form';
+import Username from './Username';
+import './../Form.css';
 
-const Form = () => {
+const onSubmit = values => {
+  window.alert(JSON.stringify(values, 0, 2));
+};
+
+const FinalForm = () => {
   return (
-    <form className="form" onSubmit={() => {}}>
-      <div className={'cell'}>
-        <label>User name:</label>
-        <input type="text" name="username" />
-      </div>
-
-      <div className="cell" />
-
-      <div className={'cell'}>
-        <label>Password:</label>
-        <input type="password" name="psw" />
-      </div>
-
-      <div className={'cell'}>
-        <label>Confirm password:</label>
-        <input type="password" name="confirmPsw" />
-      </div>
-
-      <div className="cell">
-        <label>Country</label>
-      </div>
-
-      <div className="cell">
-        <select id="country" name="country" defaultValue="">
-          <option value="" />
-          <option value="australia">Australia</option>
-          <option value="canada">Canada</option>
-          <option value="usa">USA</option>
-        </select>
-      </div>
-
-      <button type="submit">Submit</button>
-    </form>
+    <Form
+      onSubmit={onSubmit}
+      render={({ handleSubmit }) => (
+        <form className="form" onSubmit={handleSubmit}>
+          <Username />
+        </form>
+      )}
+    />
   );
 };
 
-export default Form;
+export default FinalForm;

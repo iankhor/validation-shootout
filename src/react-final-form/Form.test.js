@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import Form from './Form';
+import { Form, Field } from 'react-final-form';
 
 const shallowComponent = (props = {}) => mount(<Form {...props} />);
 
