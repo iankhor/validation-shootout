@@ -44,4 +44,6 @@ describe('Username field', () => {
       });
     });
   });
+
+  //TODO: test to use mount but mock out unrelated component (ie: Apollo)
 });
