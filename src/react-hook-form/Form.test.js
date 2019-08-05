@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { type } from './test-utils';
+import { type } from '../test-utils';
 import Form from './Form';
 
 const shallowComponent = (props = {}) => mount(<Form {...props} />);

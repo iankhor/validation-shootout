@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { useFormContext } from 'react-hook-form';
-
 import './Form.css';
 
 const Password = () => {
