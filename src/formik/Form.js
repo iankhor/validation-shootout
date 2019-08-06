@@ -8,7 +8,9 @@ import './../Form.css';
 
 const initialValues = {
   username: '',
-  country: ''
+  country: '',
+  pwd: '',
+  confirmPwd: ''
 };
 
 const FormikForm = () => {
@@ -16,12 +18,12 @@ const FormikForm = () => {
     <Formik
       onSubmit={() => {}}
       initialValues={initialValues}
-      render={({ errors, touched }) => (
+      render={({ errors, touched, values }) => (
         <Form className="form">
           <Username errors={errors} touched={touched} />
 
           <div className="cell" />
-          <Password errors={errors} touched={touched} />
+          <Password errors={errors} touched={touched} values={values} />
 
           <Country errors={errors} touched={touched} />
         </Form>

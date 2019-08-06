@@ -77,7 +77,7 @@ describe('Username field', () => {
   });
 });
 
-fdescribe('Password field', () => {
+describe('Password field', () => {
   it('renders', () => {
     expect(
       mountComponent()
@@ -102,13 +102,28 @@ fdescribe('Password field', () => {
     ).toEqual(true);
   });
 
-  xdescribe('password validation', () => {
+  describe('password validation', () => {
+    describe('input present', () => {
+      it('displays what was entered', async () => {
+        const component = mountComponent();
+
+        type(component, "input[name='pwd']", 'password123', 'pwd');
+        await wait();
+        component.update();
+
+        expect(component.find("input[name='pwd']").props().value).toEqual('password123');
+      });
+    });
+
     describe('input not present', () => {
-      it('when touched, shows required error ', () => {
+      it('when touched, shows required error ', async () => {
         const component = mountComponent();
         const passwordInput = component.find("input[type='password'][name='pwd']");
 
         passwordInput.simulate('blur');
+        await wait();
+        component.update();
+
         expect(component.contains(<div>Password required</div>)).toEqual(true);
       });
 
@@ -117,16 +132,54 @@ fdescribe('Password field', () => {
 
         expect(component.contains(<div>Password required</div>)).toEqual(false);
       });
+    });
+  });
 
-      describe('input present', () => {
-        it('displays what was entered', () => {
+  describe('confirm password validation', () => {
+    describe('input present', () => {
+      it('displays what was entered', async () => {
+        const component = mountComponent();
+
+        type(component, "input[name='confirmPwd']", 'password123', 'confirmPwd');
+        await wait();
+        component.update();
+
+        expect(component.find("input[name='confirmPwd']").props().value).toEqual('password123');
+      });
+
+      describe('confirm password input does not match password input field', () => {
+        it('displays password does not match error', async () => {
           const component = mountComponent();
 
-          type(component, "input[name='pwd']", 'password123');
+          type(component, "input[name='pwd']", 'password123', 'pwd');
+          await wait();
+          type(component, "input[name='confirmPwd']", 'notMatchPassword123', 'confirmPwd');
+          await wait();
           component.update();
 
-          expect(component.find("input[name='pwd']").props().value).toEqual('password123');
+          expect(component.contains(<div>Password does not match</div>)).toEqual(true);
         });
+      });
+    });
+
+    describe('input not present', () => {
+      it('when touched, shows required error ', async () => {
+        const component = mountComponent();
+        const confirmPasswordInput = component.find("input[type='password'][name='confirmPwd']");
+
+        confirmPasswordInput.simulate('blur');
+        await wait();
+        component.update();
+
+        expect(component.contains(<div>Password required</div>)).toEqual(true);
+      });
+
+      it(' when not touched, does not show required error', async () => {
+        const component = mountComponent();
+        await wait();
+        component.update();
+
+        expect(component.contains(<div>Password required</div>)).toEqual(false);
       });
     });
   });

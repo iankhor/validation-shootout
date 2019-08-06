@@ -1,15 +1,15 @@
 import React, { Fragment } from 'react';
 import { Field } from 'formik';
 
-const Password = () => {
+const Password = ({ errors, touched, values }) => {
   const pwdValidator = value => {
-    // if (!value) return 'Required';
-    // if (value.length > 5) return 'Username too long';
+    if (!value) return 'Password required';
   };
 
-  const confirmPwdValidator = value => {
-    // if (!value) return 'Required';
-    // if (value.length > 5) return 'Username too long';
+  const confirmPwdValidator = (confirmPwd, pwd) => {
+    if (!confirmPwd) return 'Password required';
+
+    if (pwd !== confirmPwd) return 'Password does not match';
   };
 
   return (
@@ -17,11 +17,13 @@ const Password = () => {
       <div className={'cell'}>
         <label>Password:</label>
         <Field type="password" id="pwd" name="pwd" validate={pwdValidator} />
+        {errors.pwd && touched.pwd && <div>{errors.pwd}</div>}
       </div>
 
       <div className={'cell'}>
         <label>Confirm password:</label>
-        <Field type="password" id="confirmPwd" name="confirmPwd" validate={confirmPwdValidator} />
+        <Field type="password" id="confirmPwd" name="confirmPwd" validate={confirmPwd => confirmPwdValidator(confirmPwd, values.pwd)} />
+        {errors.confirmPwd && touched.confirmPwd && <div>{errors.confirmPwd}</div>}
       </div>
     </Fragment>
   );
