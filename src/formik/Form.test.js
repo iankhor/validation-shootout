@@ -247,3 +247,38 @@ describe('Country field', () => {
     });
   });
 });
+
+describe('form submission', () => {
+  it('has a submit button', () => {
+    const component = mountComponent();
+    expect(component.find("button[type='submit']").exists()).toEqual(true);
+  });
+
+  describe('valid form', () => {
+    it('submits the form', async () => {
+      const component = mountComponent();
+
+      type(component, "input[name='username']", '12345', 'username');
+      await wait();
+      type(component, "input[name='pwd']", 'password123', 'pwd');
+      await wait();
+      type(component, "input[name='confirmPwd']", 'password123', 'confirmPwd');
+      await wait();
+      component.find("select[name='country']").simulate('change', { target: { name: 'country', value: 'australia' } });
+      await wait();
+
+      component.find('form').simulate('submit');
+      await wait();
+      component.update();
+
+      const submittedValues = JSON.parse(component.find('pre').text());
+
+      expect(submittedValues).toEqual({
+        username: '12345',
+        pwd: 'password123',
+        confirmPwd: 'password123',
+        country: 'australia'
+      });
+    });
+  });
+});

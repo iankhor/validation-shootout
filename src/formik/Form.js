@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Username from './Username';
 import Password from './Password';
 import Country from './Country';
@@ -14,9 +14,13 @@ const initialValues = {
 };
 
 const FormikForm = () => {
+  const [formValues, setFormValues] = useState({});
+
+  const onSubmit = values => setFormValues(values);
+
   return (
     <Formik
-      onSubmit={() => {}}
+      onSubmit={onSubmit}
       initialValues={initialValues}
       render={({ errors, touched, values }) => (
         <Form className="form">
@@ -32,7 +36,7 @@ const FormikForm = () => {
           <div className="cell" />
 
           <h3>Submitted values</h3>
-          {/* <pre></pre> */}
+          <pre>{JSON.stringify(formValues, 0, 2)}</pre>
         </Form>
       )}
     />
@@ -40,11 +44,3 @@ const FormikForm = () => {
 };
 
 export default FormikForm;
-
-{
-  /*
-
-
-
-      <button type="submit">Submit</button> */
-}
