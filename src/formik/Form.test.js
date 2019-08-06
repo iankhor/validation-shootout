@@ -76,3 +76,66 @@ describe('Username field', () => {
     });
   });
 });
+
+describe('Country field', () => {
+  it('renders', () => {
+    expect(
+      mountComponent()
+        .find('Country')
+        .exists()
+    ).toEqual(true);
+  });
+
+  it('has select field', () => {
+    expect(
+      mountComponent()
+        .find("select[name='country']")
+        .exists()
+    ).toEqual(true);
+  });
+
+  it('nothing is selected by default', () => {
+    expect(
+      mountComponent()
+        .find("select[name='country']")
+        .props().value
+    ).toEqual('');
+  });
+
+  describe('select validation', () => {
+    describe('not selected', () => {
+      it('when touched, shows required error ', async () => {
+        const component = mountComponent();
+        const countrySelect = component.find("select[name='country']");
+
+        countrySelect.simulate('blur');
+        await wait();
+        component.update();
+
+        expect(component.contains(<div>Country is required</div>)).toEqual(true);
+      });
+
+      it(' when not touched, does not show required error', async () => {
+        const component = mountComponent();
+
+        await wait();
+        component.update();
+
+        expect(component.contains(<div>Country is required</div>)).toEqual(false);
+      });
+    });
+
+    describe('selected', () => {
+      it('shows the selected value', async () => {
+        const component = mountComponent();
+        const countrySelect = component.find("select[name='country']");
+
+        countrySelect.simulate('change', { target: { name: 'country', value: 'australia' } });
+        await wait();
+        component.update();
+
+        expect(component.find("select[name='country']").props().value).toEqual('australia');
+      });
+    });
+  });
+});
