@@ -26,6 +26,13 @@ const FormikForm = () => {
           <Password errors={errors} touched={touched} values={values} />
 
           <Country errors={errors} touched={touched} />
+
+          <button type="submit">Submit</button>
+
+          <div className="cell" />
+
+          <h3>Submitted values</h3>
+          {/* <pre></pre> */}
         </Form>
       )}
     />
