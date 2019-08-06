@@ -77,6 +77,61 @@ describe('Username field', () => {
   });
 });
 
+fdescribe('Password field', () => {
+  it('renders', () => {
+    expect(
+      mountComponent()
+        .find('Password')
+        .exists()
+    ).toEqual(true);
+  });
+
+  it('has password field', () => {
+    expect(
+      mountComponent()
+        .find("input[type='password'][name='pwd']")
+        .exists()
+    ).toEqual(true);
+  });
+
+  it('has confirm password field', () => {
+    expect(
+      mountComponent()
+        .find("input[type='password'][name='confirmPwd']")
+        .exists()
+    ).toEqual(true);
+  });
+
+  xdescribe('password validation', () => {
+    describe('input not present', () => {
+      it('when touched, shows required error ', () => {
+        const component = mountComponent();
+        const passwordInput = component.find("input[type='password'][name='pwd']");
+
+        passwordInput.simulate('blur');
+        expect(component.contains(<div>Password required</div>)).toEqual(true);
+      });
+
+      it(' when not touched, does not show required error', () => {
+        const component = mountComponent();
+
+        expect(component.contains(<div>Password required</div>)).toEqual(false);
+      });
+
+      describe('input present', () => {
+        it('displays what was entered', () => {
+          const component = mountComponent();
+
+          type(component, "input[name='pwd']", 'password123');
+          component.update();
+
+          expect(component.find("input[name='pwd']").props().value).toEqual('password123');
+        });
+      });
+    });
+  });
+});
+
 describe('Country field', () => {
   it('renders', () => {
     expect(

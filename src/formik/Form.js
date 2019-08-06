@@ -1,5 +1,6 @@
 import React from 'react';
 import Username from './Username';
+import Password from './Password';
 import Country from './Country';
 import { Formik, Form } from 'formik';
 
@@ -20,6 +21,7 @@ const FormikForm = () => {
           <Username errors={errors} touched={touched} />
 
           <div className="cell" />
+          <Password errors={errors} touched={touched} />
 
           <Country errors={errors} touched={touched} />
         </Form>
@@ -32,14 +34,7 @@ export default FormikForm;
 
 {
   /*
-      <div className={'cell'}>
-        <label>Confirm password:</label>
-        <input type="password" name="confirmPsw" />
-      </div>
 
-      <div className="cell">
-        <label>Country</label>
-      </div>
 
 
       <button type="submit">Submit</button> */
