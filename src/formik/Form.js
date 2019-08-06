@@ -1,16 +1,28 @@
 import React from 'react';
+import Username from './Username';
+import { Formik, Form } from 'formik';
+
+import './../Form.css';
 
 const FormikForm = () => {
   return (
-    <form className="form" onSubmit={() => {}}>
-      <div className={'cell'}>
-        <label>User name:</label>
-        <input type="text" name="username" />
-      </div>
+    <Formik
+      onSubmit={() => {}}
+      render={({ errors, status, touched, isSubmitting }) => (
+        <Form className="form">
+          <Username errors={errors} touched={touched} />
 
-      <div className="cell" />
+          <div className="cell" />
+        </Form>
+      )}
+    />
+  );
+};
 
-      <div className={'cell'}>
+export default FormikForm;
+
+{
+  /* <div className={'cell'}>
         <label>Password:</label>
         <input type="password" name="psw" />
       </div>
@@ -33,9 +45,5 @@ const FormikForm = () => {
         </select>
       </div>
 
-      <button type="submit">Submit</button>
-    </form>
-  );
-};
-
-export default FormikForm;
+      <button type="submit">Submit</button> */
+}
