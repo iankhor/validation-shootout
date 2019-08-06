@@ -1,7 +1,7 @@
 import React from 'react';
 import { type } from '../test-utils';
 import { mount, shallow } from 'enzyme';
-import { ErrorMessage } from 'formik';
+import wait from 'waait';
 
 import Form from './Form';
 
@@ -19,7 +19,7 @@ it('has a form element', () => {
   ).toEqual(true);
 });
 
-fdescribe('Username field', () => {
+describe('Username field', () => {
   it('renders', () => {
     expect(
       mountComponent()
@@ -30,45 +30,44 @@ fdescribe('Username field', () => {
 
   describe('validation', () => {
     describe('input', () => {
-      fdescribe('not present', () => {
-        it('when touched, shows required error ', done => {
+      describe('not present', () => {
+        it('when touched, shows required error ', async () => {
           const component = mountComponent();
           const usernameInput = component.find("input[name='username']");
 
           usernameInput.simulate('blur');
+          await wait();
+          component.update();
 
-          process.nextTick(() => {
-            component.update();
-            expect(component.find('Username').contains(<div>Required</div>)).toEqual(true);
-            done();
-          });
+          expect(component.find('Username').contains(<div>Required</div>)).toEqual(true);
         });
 
-        it(' when not touched, does not show required error', done => {
+        it(' when not touched, does not show required error', async () => {
           const component = mountComponent();
 
-          process.nextTick(() => {
-            component.update();
-            expect(component.find('Username').contains(<div>Required</div>)).toEqual(false);
-            done();
-          });
+          await wait();
+          component.update();
+
+          expect(component.find('Username').contains(<div>Required</div>)).toEqual(false);
         });
       });
 
       describe('present', () => {
-        it('when more than 5, displays error', () => {
+        it('when more than 5, displays error', async () => {
           const component = mountComponent();
 
-          type(component, "input[name='username']", '123456');
+          type(component, "input[name='username']", '123456', 'username');
+          await wait();
           component.update();
 
           expect(component.contains(<div>Username too long</div>)).toEqual(true);
         });
 
-        it('when less than 5 inclusive, does not display error', () => {
+        it('when less than 5 inclusive, does not display error', async () => {
           const component = mountComponent();
 
-          type(component, "input[name='username']", '12345');
+          type(component, "input[name='username']", '12345', 'username');
+          await wait();
           component.update();
 
           expect(component.contains(<div>Username too long</div>)).toEqual(false);

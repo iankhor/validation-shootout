@@ -11,7 +11,8 @@
     "react-dom": "^16.8.6",
     "react-final-form": "^6.3.0",
     "react-hook-form": "^3.21.3",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "waait": "^1.0.5"
   },
   "scripts": {
     "start": "react-scripts start",

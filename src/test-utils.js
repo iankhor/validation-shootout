@@ -4,10 +4,12 @@ export function pressKey(wrapper, selector, key) {
   wrapper.find(selector).simulate('keydown', { key });
 }
 
-export function type(wrapper, selector, string) {
+export function type(wrapper, selector, string, fieldName = '') {
   [...string].forEach(letter => pressKey(wrapper, selector, letter));
 
-  wrapper.find(selector).simulate('change', { target: { value: string } });
+  const event = !!fieldName ? { target: { name: fieldName, value: string } } : { target: { value: string } };
+
+  wrapper.find(selector).simulate('change', event);
   wrapper.find(selector).simulate('blur');
 }
 

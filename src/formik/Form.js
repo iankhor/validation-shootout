@@ -4,11 +4,16 @@ import { Formik, Form } from 'formik';
 
 import './../Form.css';
 
+const initialValues = {
+  username: ''
+};
+
 const FormikForm = () => {
   return (
     <Formik
       onSubmit={() => {}}
-      render={({ errors, status, touched, isSubmitting }) => (
+      initialValues={initialValues}
+      render={({ errors, touched }) => (
         <Form className="form">
           <Username errors={errors} touched={touched} />
 
