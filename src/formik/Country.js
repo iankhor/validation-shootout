@@ -12,7 +12,7 @@ const Country = ({ errors, touched }) => {
         <label>Country</label>
       </div>
 
-      <div className="cell">
+      <div className={'cell ' + (errors.country && touched.country ? 'error' : '')}>
         <Field component="select" name="country" validate={countryValidator}>
           <option value="" />
           <option value="australia">Australia</option>

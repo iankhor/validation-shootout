@@ -14,13 +14,13 @@ const Password = ({ errors, touched, values }) => {
 
   return (
     <Fragment>
-      <div className={'cell'}>
+      <div className={'cell ' + (errors.pwd && touched.pwd ? 'error' : '')}>
         <label>Password:</label>
         <Field type="password" id="pwd" name="pwd" validate={pwdValidator} />
         {errors.pwd && touched.pwd && <div>{errors.pwd}</div>}
       </div>
 
-      <div className={'cell'}>
+      <div className={'cell ' + (errors.confirmPwd && touched.confirmPwd ? 'error' : '')}>
         <label>Confirm password:</label>
         <Field type="password" id="confirmPwd" name="confirmPwd" validate={confirmPwd => confirmPwdValidator(confirmPwd, values.pwd)} />
         {errors.confirmPwd && touched.confirmPwd && <div>{errors.confirmPwd}</div>}

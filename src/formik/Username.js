@@ -8,7 +8,7 @@ const Username = ({ errors, touched }) => {
   };
 
   return (
-    <div className={'cell'}>
+    <div className={'cell ' + (errors.username && touched.username ? 'error' : '')}>
       <label>User name:</label>
       <Field type="text" id="username" name="username" validate={usernameValidator} />
       {errors.username && touched.username && <div>{errors.username}</div>}
